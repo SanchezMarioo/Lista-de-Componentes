@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@fontsource-variable/rubik": "^5.0.22"
+    "@fontsource-variable/rubik": "^5.0.22",
+    "vercel": "^34.2.6"
   }
 }
