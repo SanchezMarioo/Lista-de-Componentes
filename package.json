@@ -9,7 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@fontsource-variable/outfit": "^5.0.13",
     "@fontsource-variable/rubik": "^5.0.22",
-    "vercel": "^34.2.6"
+    "@fontsource/poppins": "^5.0.14",
+    "vercel": "^32.3.0"
   }
 }

@@ -5,23 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="estilos.css">
-    <script src="app.js"></script>
+    <script src="app.js" defer></script>
 </head>
 <body>
-    <header> 
-        <h1>TechCart</h1>
-        <img src="../img/DALL·E 2024-06-09 13.05.22 - A creative logo for 'TechCart'.png" alt="">
+    <header>
+        <img src="img/DALL·E 2024-06-09 13.05.22 - A creative logo for 'TechCart'.png" alt="logo" width="200">
     </header>
-    <article class="componentes-container">
-        <h2>Lista de componentes</h2>
-        <p>Procesador</p>
-        <p>Memoria RAM</p>
-        <p>Disco Duro</p>
-        <p>Tarjeta de video</p>
-        <p>Placa madre</p>
+    <div class="container">
+        <div class="procesador">
+            <h2>Procesador</h2>            
+            <select name="procesador" id="procesador">
+                <option value="0">Seleccione Procesador</option>
+                <option value="intel-i9-590">Intel Core i9 - $590</option>
+                <option value="intel-i7-380">Intel Core i7 - $380</option>
+                <option value="intel-i5-250">Intel Core i5 - $250</option>
+                <option value="intel-i3-120">Intel Core i3 - $120</option>
+                <option value="amd-ryzen9-550">AMD Ryzen 9 - $550</option>
+                <option value="amd-ryzen7-350">AMD Ryzen 7 - $350</option>
+                <option value="amd-ryzen5-220">AMD Ryzen 5 - $220</option>
+                <option value="amd-ryzen3-100">AMD Ryzen 3 - $100</option>
+                <option value="apple-m1-700">Apple M1 - $700</option>
+                <option value="apple-m2-1000">Apple M2 - $1000</option>
+            </select>
+            <div class="icono-procesador">
+                <img src="img/Procesador.png" alt="" id="procesadorUrl">
+            </div>
+            <div class="procesador-value">
+                <input type="text" name="procesador-value" id="procesador-value" value="0" disabled readonly draggable="true">
+            </div>
 
-    </article>
-
-    
+        </div>
+    </div>
 </body>
 </html>
