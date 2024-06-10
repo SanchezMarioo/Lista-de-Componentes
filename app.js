@@ -1,7 +1,7 @@
-var procesador = document.getElementById('procesador');
-var procesadorPrecio = document.getElementById('procesador-value');
 
 function procesadorSeleccionado() {
+let procesador = document.getElementById('procesador');
+let procesadorPrecio = document.getElementById('procesador-value');    
 let imagenUrl = document.getElementById('procesadorUrl');
 document.querySelector('select').addEventListener('change', function(event) {
     switch (event.target.value) {
@@ -54,7 +54,29 @@ document.querySelector('select').addEventListener('change', function(event) {
     default:
         mensaje = 'Por favor, seleccione un procesador válido.';
         break;
+    dragDrop(procesadorPrecio);
+    
 }
 });
 }
 procesadorSeleccionado();
+function dragDrop() {
+    let procesadorValue = document.getElementById('procesadorUrl');
+    let procesadorDrag = document.getElementById('procesador-drag');
+
+    // Cuando se inicia el arrastre, guarda el valor en el objeto de datos de arrastre
+    procesadorValue.addEventListener('dragstart', function(event) {
+        event.dataTransfer.setData('text/plain', procesadorValue.value);
+    });
+
+    // Cuando se arrastra sobre el objetivo, evita el comportamiento predeterminado para permitir soltar
+    procesadorDrag.addEventListener('dragover', function(event) {
+        event.preventDefault();
+    });
+
+    // Cuando se suelta, actualiza el valor del objetivo con los datos de arrastre
+    procesadorDrag.addEventListener('drop', function(event) {
+        event.preventDefault();
+        procesadorDrag.value = event.dataTransfer.getData('text/plain');
+    });
+}

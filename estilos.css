@@ -1,57 +1,110 @@
-header{
+/* Estilo general del cuerpo */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+/* Estilo del encabezado */
+header {
     display: flex;
     justify-content: center;
     align-items: center;
-
+    width: 100%;
+    background-color: #fff;
+    padding: 20px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-h2{
-    color: black;
-    font-size: 2vw;
-    font-family: "Poppins", sans-serif;
 
+/* Título */
+h2 {
+    color: #333;
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 20px;
 }
-select,input{
-    background-color: black;
-    color: white;
-    border-radius: 10px;
-    font-family: "Poppins", sans-serif;
+
+/* Estilo del selector y del campo de entrada */
+select, input {
+    background-color: #333;
+    color: #fff;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
     font-weight: 600;
+    padding: 10px;
+    border: none;
+    width: 100%;
+    margin-top: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-}
-.container{
+/* Estilo del contenedor principal */
+.container {
     display: flex;
-    justify-content: space-around;
-    flex-direction: column;
-    margin-top: 50px;
-}
-.procesador{
-    display: flex;
-    justify-content: space-around;
-    margin-top: 50px;
-    flex-wrap: wrap;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    width: 20vw;
+    margin-top: 50px;
+    flex-direction: column;
+    width: 100%;
 }
-.procesador img{
-    width: 10vw;
-    height: auto;
-    margin: 20px;
 
+/* Estilo del contenedor izquierdo */
+.cont-izq {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    flex-wrap: wrap;
 }
-select{
-    width: 10vw;
-    height: 2vw;
-    margin-top: 10px;
-    background-color: black;
-    color: white;
+
+/* Estilo del contenedor del procesador */
+.procesador {
+    background-color: #fff;
+    padding: 20px;
     border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 20vw;
+    text-align: center;
 }
-input{
-    width: 10vw;
-    height: 2vw;
-    margin-top: 10px;
-    background-color: black;
-    color: white;
+
+/* Estilo de la imagen del procesador */
+.procesador img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin: 20px 0;
     border-radius: 10px;
+    border: 1px solid #eee;
+    max-width: 200px;
+}
+
+/* Estilo del valor del procesador */
+.procesador-value input {
+    background-color: #f4f4f9;
+    color: #333;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    padding: 10px;
+    border: none;
+    margin-top: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo adicional para la caja de entrada */
+input:disabled, input[readonly] {
+    background-color: #f4f4f9;
+    color: #333;
+}
+.procesador-value{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
 }
