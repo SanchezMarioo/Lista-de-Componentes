@@ -81,4 +81,55 @@ select:hover, input:hover {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+<<<<<<< HEAD
+=======
+    width: 100vw;
+    flex-wrap: wrap;
+}
+
+/* Estilo del contenedor del procesador */
+.procesador {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 20vw;
+    text-align: center;
+}
+
+/* Estilo de la imagen del procesador */
+.procesador img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin: 20px 0;
+    border-radius: 10px;
+    border: 1px solid #eee;
+    max-width: 200px;
+}
+
+/* Estilo del valor del procesador */
+.procesador-value input {
+    background-color: #f4f4f9;
+    color: #333;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    padding: 10px;
+    border: none;
+    margin-top: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo adicional para la caja de entrada */
+input:disabled, input[readonly] {
+    background-color: #f4f4f9;
+    color: #333;
+}
+.procesador-value{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+>>>>>>> 682368c78118f890e7a1327c6c3946ff83c124a3
 }
