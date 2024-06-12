@@ -3,19 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechCart</title>
+    <title>Document</title>
     <link rel="stylesheet" href="estilos.css">
     <script src="app.js" defer></script>
-    <link rel="shortcut icon" href="img/favicon-32x32.png" type="image/x-icon">
 </head>
 <body>
     <header>
-        <img src="img/DALL·E 2024-06-09 13.05.22 - A creative logo for 'TechCart'.png" alt="logo" width="200" draggable="true">
+        <img src="img/DALL·E 2024-06-09 13.05.22 - A creative logo for 'TechCart'.png" alt="logo" width="200">
     </header>
     <div class="container">
         <div class="cont-izq">
             <div class="procesador">
-                <h2>Procesador</h2>            
+                <h2>Procesador</h2>
                 <select name="procesador" id="procesador">
                     <option value="0">Seleccione Procesador</option>
                     <option value="intel-i9-590">Intel Core i9 - $590</option>
@@ -30,22 +29,14 @@
                     <option value="apple-m2-1000">Apple M2 - $1000</option>
                 </select>
                 <div class="icono-procesador">
-                    <img src="img/Procesador.png" alt="" id="procesadorUrl" draggable="true">
+                    <img src="img/Procesador.png" alt="Procesador" id="procesadorUrl" draggable="true">
                 </div>
                 <div class="procesador-value">
-                    <input type="text" name="procesador-value" id="procesador-value" value="0" disabled readonly draggable="true">
-                    <input type="text" name="procesador-drag" id="procesador-drag" disabled readonly value="Arrastra para añadir" draggable="true">
+                    <input type="text" name="procesador-value" id="procesador-value" value="0" disabled readonly>
                 </div>
-            </div>
-            <div class="ram">
-                <h2>Memoria RAM</h2>
-                <select name="ram" id="ram">
-                    <option value="0">Seleccione Memoria RAM</option>
-                    <option value="hyperx-16gb-100">HyperX 16GB - $100</option>
-                    <option value="hyperx-8gb-50">HyperX 8GB - $50</option>
-                    <option value="hyperx-4gb-25">HyperX 4GB - $25</option>
-                    <option value="corsair-16gb-90">Corsair 16GB - $90</option>
-                </select>
+                <div id="procesador-drag" style="padding: 10px; width: 200px; height: 50px; border: 1px solid #ccc; margin-top: 20px;">
+                    Arrastre el procesador aquí
+                </div>
             </div>
         </div>
     </div>
