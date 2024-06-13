@@ -1,6 +1,5 @@
-
+let procesadorPrecio = 0; 
 var componenteName
-var error = document.getElementById('error-procesador');
 function procesadorSeleccionado() {
     const procesador = document.getElementById('procesador');
     const imagenUrl = document.getElementById('procesadorUrl');
@@ -10,14 +9,15 @@ function procesadorSeleccionado() {
  
 
     procesador.addEventListener('change', function(event) {
-        let procesadorPrecio;
+
+        let imagenSrc;
+        let nombre;
         switch (event.target.value) {
             case 'intel-i9-590':
                 procesadorPrecio = "590$";
                 imagenUrl.src = "https://www.intel.com/content/dam/www/central-libraries/xa/en/images/intel-core-i9-badge-1920x1080.png";
                 imagenUrl.alt = "Intel i9 590";
                 componenteName = "Intel i9 14900K"
-                
                 break;
             case 'intel-i7-380':
                 procesadorPrecio = "380$";
@@ -60,18 +60,21 @@ function procesadorSeleccionado() {
                 imagenUrl.src = "https://www.amd.com/system/files/82446-raven-am4-ryzen-3-pib-left-facing-1260x709.png";
                 imagenUrl.alt = "AMD Ryzen 3 5300";
                 componenteName = "AMD Ryzen 3 5300G"
+                
                 break;
             case 'apple-m1-700':
                 procesadorPrecio = "700$";
                 imagenUrl.src = "https://images.versus.io/objects/apple-m1-pro-10-core.front.variety.1635345805946.jpg";
                 imagenUrl.alt = "Apple M1 700";
                 componenteName = "Apple M1"
+                
                 break;
             case 'apple-m2-1000':
                 procesadorPrecio = "1000$";
                 imagenUrl.src = "https://www.apple.com/newsroom/images/live-action/wwdc-2023/standard/m2/Apple-WWDC23-M2-Ultra-chip-230605_big.jpg.large.jpg";
                 imagenUrl.alt = "Apple M2 1000";
                 componenteName = "Apple M2"
+                
                 break;
             case '0':
                 procesadorPrecio = "Precio no disponible";
@@ -93,7 +96,6 @@ function procesadorSeleccionado() {
 
 
 function dragDrop(imagenUrl, procesadorDrag) {
-
     imagenUrl.addEventListener('dragstart', function(event) {
         event.dataTransfer.setData('text', event.target.id);
         console.log(imagenUrl.src);
@@ -104,14 +106,14 @@ function dragDrop(imagenUrl, procesadorDrag) {
     });
 
     procesadorDrag.addEventListener('drop', function(event) {
-        if (imagenUrl.src === 'http://127.0.0.1:3000/img/Procesador.png') {
+        if (imagenUrl.alt === 'Procesador' || procesadorPrecio === 'Seleccione un procesador válido' || procesadorPrecio === 'Precio no disponible' || procesadorPrecio === '0' || imagenUrl.src === 'img/Procesador.png') {
             notificacionError();
-            return false;
+            return true;
 
         } else {
             event.preventDefault();
             notificacionSucess();
-
+            itemCarrito(componenteName, imagenUrl.src, procesadorPrecio);
         }
     });
     }
@@ -134,3 +136,43 @@ function notificacionError(){
       });
 }
 
+function mostrarCarrito(){
+    let carritoImg = document.getElementById('carritoImg');
+    let carritoContainer = document.getElementById('carrito-container');
+    carritoImg.addEventListener('click', function(){
+        carritoContainer.style.opacity = '1';
+});
+}
+mostrarCarrito();
+// Arreglar el cierre del carrito
+function itemCarrito(nombre, imagen, precio) {
+    const carritoItems = document.getElementById('carrito-items');
+    const totalInput = document.getElementById('carrito-total');
+
+    // Crear un nuevo elemento de carrito
+    const carritoItem = document.createElement('div');
+    carritoItem.className = 'carrito-item';
+
+    const itemNombre = document.createElement('p');
+    itemNombre.textContent = nombre;
+    carritoItem.appendChild(itemNombre);
+
+    const itemImagen = document.createElement('img');
+    itemImagen.src = imagen;
+    itemImagen.width = 100;
+    itemImagen.height = 100;
+    itemImagen.style.objectFit = 'cover';
+    carritoItem.appendChild(itemImagen);
+
+    const itemPrecio = document.createElement('input');
+    itemPrecio.type = 'text';
+    itemPrecio.value = precio;
+    itemPrecio.disabled = true;
+    carritoItem.appendChild(itemPrecio);
+
+    carritoItems.appendChild(carritoItem);
+
+    // Actualizar el total del carrito
+    let total = document.getElementById('carrito-total');
+    totalInput.value = (parseFloat(totalInput.value)) + parseFloat(precio);
+}

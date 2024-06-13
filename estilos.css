@@ -65,6 +65,7 @@ select:hover, input:hover {
     padding: 20px;
     justify-content: space-around;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .procesador {
@@ -95,6 +96,8 @@ select:hover, input:hover {
 }
 
 .cont-izq {
+    width: 25vw;
+    height: 100vh;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -103,11 +106,12 @@ select:hover, input:hover {
 }
 /* Estilo del contenedor del procesador */
 .procesador {
+    width: 25vw;
+    height: 25vw;
     background-color: #fff;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 20vw;
     text-align: center;
 }
 
@@ -146,25 +150,26 @@ input:disabled, input[readonly] {
     align-items: center;
     flex-direction: row;
 }
-.carrito-cont{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+.carrito-container{
     width: 25vw;
+    height: 25%;
     padding: 20px;
     background-color: #ffffff;
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.3s ease;
 }
 .cont-der{
+    width: 25vw;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
 .tarjeta{
+    width: 25vw;
+    height: 25vw;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -180,7 +185,17 @@ input:disabled, input[readonly] {
     transform: translateY(-10px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
 }
-.carrito-cont:hover{
+.carrito-container:hover{
     transform: translateY(-10px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+}
+.carrito-container {
+    opacity: 0;
+    overflow: auto;
+}
+.carrito-item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
 }
