@@ -1,23 +1,40 @@
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #f0f0f0;
     margin: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
+    background-color: #f4f4f9;
 }
 
 header {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 100vw;
     background-color: #ffffff;
     padding: 10px 0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+.icono{
+    width: 65%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+.carrito{
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    width: 50%;
+    margin-right: 40px;
+}
+.carrito img{
+    cursor: pointer;
+}
+
 
 h2 {
     color: black;
@@ -44,10 +61,10 @@ select:hover, input:hover {
 
 .container {
     display: flex;
-    justify-content: center;
+    width: 100vw;
+    padding: 20px;
+    justify-content: space-around;
     align-items: center;
-    margin-top: 50px;
-    flex-direction: column;
 }
 
 .procesador {
@@ -61,6 +78,7 @@ select:hover, input:hover {
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+
 }
 
 .procesador:hover {
@@ -78,15 +96,11 @@ select:hover, input:hover {
 
 .cont-izq {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     flex-direction: column;
-<<<<<<< HEAD
-=======
-    width: 100vw;
     flex-wrap: wrap;
 }
-
 /* Estilo del contenedor del procesador */
 .procesador {
     background-color: #fff;
@@ -131,5 +145,42 @@ input:disabled, input[readonly] {
     justify-content: space-around;
     align-items: center;
     flex-direction: row;
->>>>>>> 682368c78118f890e7a1327c6c3946ff83c124a3
+}
+.carrito-cont{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 25vw;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.cont-der{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.tarjeta{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+}
+.tarjeta:hover{
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+}
+.carrito-cont:hover{
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
 }

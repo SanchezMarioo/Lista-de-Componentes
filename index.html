@@ -6,10 +6,16 @@
     <title>Document</title>
     <link rel="stylesheet" href="estilos.css">
     <script src="app.js" defer></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
     <header>
-        <img src="img/DALL·E 2024-06-09 13.05.22 - A creative logo for 'TechCart'.png" alt="logo" width="200">
+    <div class="icono">        
+        <img src="img/DALL·E 2024-06-09 13.05.22 - A creative logo for 'TechCart'.png" alt="logo" width="200" draggable="false">
+    </div>
+    <div class="carrito">
+        <img src="img/carrito.png" alt="carrito" width="100" draggable="false">
+    </div>
     </header>
     <div class="container">
         <div class="cont-izq">
@@ -37,8 +43,59 @@
                 <div id="procesador-drag" style="padding: 10px; width: 200px; height: 50px; border: 1px solid #ccc; margin-top: 20px;">
                     Arrastre el procesador aquí
                 </div>
+
+            </div>
+        </div>
+        <div class="cont-der">
+            <div class="tarjeta">
+                <h2>Tarjeta de Video</h2>
+                <select name="tarjeta" id="tarjeta">
+                    <option value="0">Seleccione Tarjeta de Video</option>
+                    <option value="nvidia-rtx3090-1500">Nvidia RTX 3090 - $1500</option>
+                    <option value="nvidia-rtx3080-1000">Nvidia RTX 3080 - $1000</option>
+                    <option value="nvidia-rtx3070-700">Nvidia RTX 3070 - $700</option>
+                    <option value="nvidia-rtx3060-400">Nvidia RTX 3060 - $400</option>
+                    <option value="amd-rx6900xt-1200">AMD RX 6900 XT - $1200</option>
+                    <option value="amd-rx6800xt-800">AMD RX 6800 XT - $800</option>
+                    <option value="amd-rx6700xt-500">AMD RX 6700 XT - $500</option>
+                    <option value="amd-rx6600xt-300">AMD RX 6600 XT - $300</option>
+                    <option value="apple-m1-700">Apple M1 - $700</option>
+                    <option value="apple-m2-1000">Apple M2 - $1000</option>
+                </select>
+                <div class="icono-tarjeta">
+                    <img src="img/Tarjeta.png" alt="Tarjeta" id="tarjetaUrl" draggable="true">
+                </div>
+                <div class="tarjeta-value">
+                    <input type="text" name="tarjeta-value" id="tarjeta-value" value="0" disabled readonly>
+                </div>
+                <div id="tarjeta-drag" style="padding: 10px; width: 200px; height: 50px; border: 1px solid #ccc; margin-top: 20px;">
+                    Arrastre la tarjeta aquí
+                </div>
+            </div>
+        </div>
+        <div class="carrito-container">
+            <div class="carrito-cont">
+                <h2>Carrito</h2>
+                <div class="carrito-items" id="carrito-items">
+                    <div class="carrito-item" id="carrito-item">
+                        <div class="carrito-item-img">
+                            <img src="img/Procesador.png" alt="Procesador" width="50">
+                        </div>
+                        <div class="carrito-item-value">
+                            <input type="text" name="carrito-item-value" id="carrito-item-value" value="0" disabled readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="carrito-total">
+                    <h3>Total</h3>
+                    <input type="text" name="carrito-total" id="carrito-total" value="0" disabled readonly>
+                </div>
+                <div class="carrito-comprar">
+                    <button id="carrito-comprar">Comprar</button>
+                </div>
             </div>
         </div>
     </div>
+
 </body>
 </html>
