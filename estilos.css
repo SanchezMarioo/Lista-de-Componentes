@@ -87,13 +87,6 @@ select:hover, input:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-.procesador img {
-    width: 12vw;
-    height: 12vw;
-    object-fit: cover;
-    margin: 20px 0;
-    border-radius: 10px;
-}
 
 .cont-izq {
     width: 25vw;
@@ -122,7 +115,6 @@ select:hover, input:hover {
     object-fit: cover;
     margin: 20px 0;
     border-radius: 10px;
-    border: 1px solid #eee;
     max-width: 200px;
 }
 
@@ -201,4 +193,13 @@ input:disabled, input[readonly] {
     justify-content: space-between;
     align-items: center;
     padding: 20px;
+}
+.icono-tarjeta img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    margin: 20px 0;
+    border-radius: 10px;
+    border: 1px solid #eee;
+    max-width: 200px;
 }

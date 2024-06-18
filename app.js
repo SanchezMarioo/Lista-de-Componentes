@@ -1,15 +1,10 @@
-
-
 let procesadorPrecio = 0; 
 var componenteName
-/**
- * Handles the selection of a processor.
- */
 function procesadorSeleccionado() {
     const procesador = document.getElementById('procesador');
     const imagenUrl = document.getElementById('procesadorUrl');
     const procesadorValue = document.getElementById('procesador-value');
-    const procesadorDrag = document.getElementById('procesador-drag');
+    const dragComponente = document.getElementById('procesador-drag');
     procesador.addEventListener('change', function(event) {
         switch (event.target.value) {
             case 'intel-i9-590':
@@ -88,34 +83,120 @@ function procesadorSeleccionado() {
         }
 
         procesadorValue.value = procesadorPrecio;
+        dragDrop(imagenUrl, dragComponente, procesadorPrecio, componenteName);
     });
+}
+function tarjetaGráficaSeleccionada() {
+    let tarjetaGrafica = document.getElementById('tarjeta');
+    let graficaUrl = document.getElementById('tarjetaUrl');
+    let tarjetaPrecio = document.getElementById('tarjeta-value'); // Cambiado var a let para mantener consistencia
+    let graficaDrag = document.getElementById('tarjeta-drag');
 
-    dragDrop(imagenUrl, procesadorDrag);
+    tarjetaGrafica.addEventListener('change', function(event) {
+        let valueGrafica;
+        let componenteName;
+        
+        switch (event.target.value) {
+            case 'nvidia-rtx3090-1500':
+                valueGrafica = "1500$";
+                graficaUrl.src = "https://assets.nvidia.partners/images/png/zt-a30900b-10p.png";
+                graficaUrl.alt = "Nvidia RTX 3090";
+                componenteName = "Nvidia RTX 3090";
+                break;
+            case 'nvidia-rtx3080-1000':
+                valueGrafica = "1000$";
+                graficaUrl.src = "https://assets.nvidia.partners/images/png/gv-n3080eagle-%2012gd.png";
+                graficaUrl.alt = "Nvidia RTX 3080";
+                componenteName = "Nvidia RTX 3080";
+                break;
+            case 'nvidia-rtx3070-700':
+                valueGrafica = "700$";
+                graficaUrl.src = "https://www.nvidia.com/content/dam/en-zz/Solutions/geforce/ampere/rtx-3070/rtx-3070-shop.png";
+                graficaUrl.alt = "Nvidia RTX 3070";
+                componenteName = "Nvidia RTX 3070";
+                break;
+            case 'nvidia-rtx3060-400':
+                valueGrafica = "400$";
+                graficaUrl.src = "https://www.nvidia.com/content/dam/en-zz/Solutions/geforce/ampere/rtx-3060/rtx-3060-shop.png";
+                graficaUrl.alt = "Nvidia RTX 3060";
+                componenteName = "Nvidia RTX 3060";
+                break;
+            case 'amd-rx6900xt-1200':
+                valueGrafica = "1200$";
+                graficaUrl.src = "https://www.amd.com/system/files/82446-raven-am4-ryzen-3-pib-left-facing-1260x709.png";
+                graficaUrl.alt = "AMD RX 6900 XT";
+                componenteName = "AMD RX 6900 XT";
+                break;
+            case 'amd-rx6800xt-800':
+                valueGrafica = "800$";
+                graficaUrl.src = "https://www.amd.com/system/files/82446-raven-am4-ryzen-3-pib-left-facing-1260x709.png";
+                graficaUrl.alt = "AMD RX 6800 XT";
+                componenteName = "AMD RX 6800 XT";
+                break;
+            case 'amd-rx6700xt-500':
+                valueGrafica = "500$";
+                graficaUrl.src = "https://www.amd.com/system/files/82446-raven-am4-ryzen-3-pib-left-facing-1260x709.png";
+                graficaUrl.alt = "AMD RX 6700 XT";
+                componenteName = "AMD RX 6700 XT";
+                break;
+            case 'amd-rx6600xt-300':
+                valueGrafica = "300$";
+                graficaUrl.src = "https://www.amd.com/system/files/82446-raven-am4-ryzen-3-pib-left-facing-1260x709.png";
+                graficaUrl.alt = "AMD RX 6600 XT";
+                componenteName = "AMD RX 6600 XT";
+                break;
+            case '0':
+                valueGrafica = "Precio no disponible";
+                graficaUrl.src = "img/Tarjeta.png";
+                graficaUrl.alt = "Tarjeta gráfica por defecto";
+                componenteName = "Tarjeta gráfica por defecto";
+                break;
+            default:
+                valueGrafica = "Seleccione una tarjeta gráfica válida";
+                graficaUrl.src = "img/Tarjeta.png";
+                graficaUrl.alt = "Tarjeta gráfica por defecto";
+                componenteName = "Tarjeta gráfica por defecto";
+                break;
+        }
+        
+        tarjetaPrecio.value = valueGrafica; // Actualizar el valor aquí dentro del manejador del evento
+        dragDrop(graficaUrl, graficaDrag, valueGrafica,componenteName);
+        cargarImagen(graficaUrl.src);
+    });
+}
+tarjetaGráficaSeleccionada();
+
+function cargarImagen(imagenUrl) {
+    console.log(imagenUrl);
 }
 
 
-function dragDrop(imagenUrl, procesadorDrag) {
+function dragDrop(imagenUrl, dragComponente, value, componenteName) {
     imagenUrl.addEventListener('dragstart', function(event) {
         event.dataTransfer.setData('text', event.target.id);
-        console.log(imagenUrl.src);
     });
 
-    procesadorDrag.addEventListener('dragover', function(event) {
+    dragComponente.addEventListener('dragover', function(event) {
         event.preventDefault();
     });
 
-    procesadorDrag.addEventListener('drop', function(event) {
+    dragComponente.addEventListener('drop', function(event) {
         let botonConfirmar = document.getElementsByClassName('swal-button swal-button--confirm');
-        if (imagenUrl.alt === 'Procesador' || procesadorPrecio === 'Seleccione un procesador válido' || procesadorPrecio === 'Precio no disponible' || procesadorPrecio === '0' || imagenUrl.src === 'img/Procesador.png') {
+        if (imagenUrl.alt === "Procesador" || procesadorPrecio === 'Seleccione un procesador válido' || procesadorPrecio === 'Precio no disponible' || procesadorPrecio === '0' || imagenUrl.src === 'img/Procesador.png') {
             notificacionError();
             return true;
 
         } else {
             event.preventDefault();
-            notificacionSucess();
+            swal({
+                title: "Se ha añadido a la cesta el producto",
+                text: "Se ha añadido a la cesta el producto: " + componenteName + " con un precio de " + value,
+                icon: "success",
+                button: "Añadir",
+              });
             botonConfirmar[0].addEventListener('click', function() {
                 comprobarCarrito();
-                itemCarrito(componenteName, imagenUrl.src, procesadorPrecio);
+                itemCarrito(componenteName, imagenUrl.src, value);
             });
         }
     });
@@ -123,14 +204,7 @@ function dragDrop(imagenUrl, procesadorDrag) {
 
 document.addEventListener('DOMContentLoaded', procesadorSeleccionado);
 
-function notificacionSucess(){
-    swal({
-        title: "Se ha añadido a la cesta el producto",
-        text: "Se ha añadido a la cesta el producto: " + componenteName + " con un precio de " + document.getElementById('procesador-value').value,
-        icon: "success",
-        button: "Añadir",
-      });
-}
+
 function notificacionError(){
     swal({
         title: "Error",
