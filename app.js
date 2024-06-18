@@ -1,17 +1,16 @@
+
+
 let procesadorPrecio = 0; 
 var componenteName
+/**
+ * Handles the selection of a processor.
+ */
 function procesadorSeleccionado() {
     const procesador = document.getElementById('procesador');
     const imagenUrl = document.getElementById('procesadorUrl');
     const procesadorValue = document.getElementById('procesador-value');
     const procesadorDrag = document.getElementById('procesador-drag');
-
- 
-
     procesador.addEventListener('change', function(event) {
-
-        let imagenSrc;
-        let nombre;
         switch (event.target.value) {
             case 'intel-i9-590':
                 procesadorPrecio = "590$";
@@ -106,6 +105,7 @@ function dragDrop(imagenUrl, procesadorDrag) {
     });
 
     procesadorDrag.addEventListener('drop', function(event) {
+        let botonConfirmar = document.getElementsByClassName('swal-button swal-button--confirm');
         if (imagenUrl.alt === 'Procesador' || procesadorPrecio === 'Seleccione un procesador válido' || procesadorPrecio === 'Precio no disponible' || procesadorPrecio === '0' || imagenUrl.src === 'img/Procesador.png') {
             notificacionError();
             return true;
@@ -113,10 +113,14 @@ function dragDrop(imagenUrl, procesadorDrag) {
         } else {
             event.preventDefault();
             notificacionSucess();
-            itemCarrito(componenteName, imagenUrl.src, procesadorPrecio);
+            botonConfirmar[0].addEventListener('click', function() {
+                comprobarCarrito();
+                itemCarrito(componenteName, imagenUrl.src, procesadorPrecio);
+            });
         }
     });
-    }
+}
+
 document.addEventListener('DOMContentLoaded', procesadorSeleccionado);
 
 function notificacionSucess(){
@@ -135,16 +139,39 @@ function notificacionError(){
         button: "Aceptar",
       });
 }
-
-function mostrarCarrito(){
-    let carritoImg = document.getElementById('carritoImg');
+function comprobarCarrito(){
     let carritoContainer = document.getElementById('carrito-container');
-    carritoImg.addEventListener('click', function(){
+    var carritoValue = document.getElementById("carrito-total");
+    var carritoItems = document.getElementById("carrito-items");
+    var carritoClick = document.getElementById("carritoImg");
+    carritoClick.addEventListener('click', function(){
+    if (carritoValue.value === "0" || carritoItems.innerHTML === ""){
+        swal({
+            title: "Error",
+            text: "No se ha seleccionado ningún producto",
+            icon: "error",
+            button: "Aceptar",
+        });
+        carritoContainer.style.opacity = '0';
+    } else {
         carritoContainer.style.opacity = '1';
+    }
 });
 }
-mostrarCarrito();
+comprobarCarrito();
+function cerrarCarrito(){
+    let carritoContainer = document.getElementById('carrito-container');
+    carritoContainer.style.opacity = '0';
+}
+
 // Arreglar el cierre del carrito
+/**
+ * Creates a new item for the shopping cart.
+ * 
+ * @param {string} nombre - The name of the item.
+ * @param {string} imagen - The URL of the item's image.
+ * @param {number} precio - The price of the item.
+ */
 function itemCarrito(nombre, imagen, precio) {
     const carritoItems = document.getElementById('carrito-items');
     const totalInput = document.getElementById('carrito-total');
@@ -175,4 +202,101 @@ function itemCarrito(nombre, imagen, precio) {
     // Actualizar el total del carrito
     let total = document.getElementById('carrito-total');
     totalInput.value = (parseFloat(totalInput.value)) + parseFloat(precio);
+    totalInput.value = totalInput.value + "$";
+    // Guardar el item en localStorage
+    var items = JSON.parse(localStorage.getItem('carritoItems')) || [];
+    items.push({ nombre, imagen, precio});
+    let totalCarrito = localStorage.getItem('carritoTotal') || 0;
+    localStorage.setItem('carritoItems', JSON.stringify(items));
+    localStorage.setItem('carritoTotal', totalCarrito + precio);
 }
+function cargarCarrito() {
+    const carritoItems = document.getElementById('carrito-items');
+    const totalInput = document.getElementById('carrito-total');
+
+    var items = JSON.parse(localStorage.getItem('carritoItems')) || [];
+    let total = parseFloat(localStorage.getItem('carritoTotal')) || 0;
+
+    items.forEach(item => {
+        const carritoItem = document.createElement('div');
+        carritoItem.className = 'carrito-item';
+
+        const itemNombre = document.createElement('p');
+        itemNombre.textContent = item.nombre;
+        carritoItem.appendChild(itemNombre);
+
+        const itemImagen = document.createElement('img');
+        itemImagen.src = item.imagen;
+        itemImagen.width = 100;
+        itemImagen.height = 100;
+        itemImagen.style.objectFit = 'cover';
+
+        carritoItem.appendChild(itemImagen);
+
+        const itemPrecio = document.createElement('input');
+        itemPrecio.type = 'text';
+        itemPrecio.value = item.precio;
+        itemPrecio.disabled = true;
+        carritoItem.appendChild(itemPrecio);
+
+        carritoItems.appendChild(carritoItem);
+    });
+}
+
+function borrarItems() {
+    const carritoItems = document.getElementById('carrito-items');
+    const totalInput = document.getElementById('carrito-total');
+
+    swal({
+        title: "Eliminar carrito items",
+        text: "¿Estás seguro de que deseas eliminar todos los elementos del carrito?",
+        icon: "warning",
+        buttons: true,
+        buttons : ["Cancelar", "Eliminar"],
+        dangerMode: true,
+    }).then((willDelete) => {
+        if (willDelete) {
+            carritoItems.innerHTML = '';
+            totalInput.value = '0';
+            localStorage.removeItem('carritoItems');
+            localStorage.removeItem('carritoTotal');
+            swal("Todos los elementos fueron borrados", {
+                title: "Carrito vacío",
+                icon: "success",
+            });
+            cerrarCarrito();
+        } else {
+            swal({
+                icon: "error",
+                title: "Operación cancelada",
+                text: "Los elementos del carrito no fueron eliminados",
+            }
+        ); 
+        }
+    });
+}
+
+function comprarItems() {
+    comprobarCarrito();
+    const carritoItems = document.getElementById('carrito-items');
+    const totalInput = document.getElementById('carrito-total');
+    const divCarrito = document.getElementById('carrito-item');
+    carritoItems.innerHTML = '';
+    let total = totalInput.value || 0;
+    totalInput.value = '0';
+    localStorage.removeItem('carritoItems');
+    localStorage.removeItem('carritoTotal');
+    if (divCarrito){
+        divCarrito.remove();
+    }
+    swal({
+        title: "Compra realizada",
+        text: "Se ha realizado la compra de los productos seleccionados por un total de " + total,
+        icon: "success",
+        button: "Aceptar",
+    });
+    cerrarCarrito();
+}
+document.getElementById('carrito-borrar').addEventListener('click', borrarItems);
+document.getElementById('carrito-comprar').addEventListener('click', comprarItems);
+document.addEventListener('DOMContentLoaded', cargarCarrito);

@@ -152,12 +152,15 @@ input:disabled, input[readonly] {
 }
 .carrito-container{
     width: 25vw;
-    height: 25%;
+    min-height: 25vh;
     padding: 20px;
     background-color: #ffffff;
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
+    max-height: 40vw;
+    overflow: auto;
+
 }
 .cont-der{
     width: 25vw;

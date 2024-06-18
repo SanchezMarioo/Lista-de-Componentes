@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="estilos.css">
+    <script type="module" src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="app.js" defer></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
     <header>
-    <div class="icono">        
-        <img src="img/DALL·E 2024-06-09 13.05.22 - A creative logo for 'TechCart'.png" alt="logo" width="200" draggable="false">
-    </div>
-    <div class="carrito">
-        <img src="img/carrito.png" alt="carrito" width="100" draggable="false" id="carritoImg">
-    </div>
+        <div class="icono">        
+            <img src="img/DALL·E 2024-06-09 13.05.22 - A creative logo for 'TechCart'.png" alt="logo" width="200" draggable="false">
+        </div>
+        <div class="carrito">
+            <img src="img/carrito.png" alt="carrito" width="100" draggable="false" id="carritoImg">
+        </div>
     </header>
     <div class="container">
         <div class="cont-izq">
@@ -43,7 +43,6 @@
                 <div id="procesador-drag" style="padding: 10px; width: 200px; height: 50px; border: 1px solid #ccc; margin-top: 20px;">
                     Arrastre el procesador aquí
                 </div>
-
             </div>
         </div>
         <div class="cont-der">
@@ -76,19 +75,17 @@
         <div class="carrito-container" id="carrito-container">
             <div class="carrito-cont">
                 <h2>Carrito</h2>
-                <div class="carrito-items" id="carrito-items">
-                    </div>
-                </div>
-                <div class="carrito-total">
-                    <h3>Total</h3>
-                    <input type="text" name="carrito-total" id="carrito-total" value="0" disabled readonly>
-                </div>
-                <div class="carrito-comprar">
-                    <button id="carrito-comprar">Comprar</button>
-                </div>
+                <div class="carrito-items" id="carrito-items"></div>
+            </div>
+            <div class="carrito-total">
+                <h3>Total</h3>
+                <input type="text" name="carrito-total" id="carrito-total" value="0" disabled readonly>
+            </div>
+            <div class="carrito-comprar">
+                <button id="carrito-comprar">Comprar</button>
+                <button id="carrito-borrar">Borrar Items</button>
             </div>
         </div>
     </div>
-
 </body>
 </html>
