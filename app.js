@@ -1,5 +1,8 @@
 let procesadorPrecio = 0; 
 var componenteName
+function uptadateSelect(selectId) {
+    selectId.value = "0";
+}
 function procesadorSeleccionado() {
     const procesador = document.getElementById('procesador');
     const imagenUrl = document.getElementById('procesadorUrl');
@@ -81,9 +84,9 @@ function procesadorSeleccionado() {
                 imagenUrl.alt = "Procesador por defecto";
                 break;
         }
-
         procesadorValue.value = procesadorPrecio;
-        dragDrop(imagenUrl, dragComponente, procesadorPrecio, componenteName);
+        dragDrop(imagenUrl, dragComponente, procesadorPrecio, componenteName,procesadorPrecio);
+
     });
 }
 function tarjetaGráficaSeleccionada() {
@@ -160,18 +163,66 @@ function tarjetaGráficaSeleccionada() {
         }
         
         tarjetaPrecio.value = valueGrafica; // Actualizar el valor aquí dentro del manejador del evento
-        dragDrop(graficaUrl, graficaDrag, valueGrafica,componenteName);
-        cargarImagen(graficaUrl.src);
+        dragDrop(graficaUrl, graficaDrag, valueGrafica,componenteName,valueGrafica);
     });
 }
 tarjetaGráficaSeleccionada();
-
-function cargarImagen(imagenUrl) {
-    console.log(imagenUrl);
+function ramSeleccionada() {
+    let ram = document.getElementById('ram');
+    let ramUrl = document.getElementById('ramUrl');
+    let ramPrecio = document.getElementById('ram-value');
+    let ramDrag = document.getElementById('ram-drag');
+    ram.addEventListener('change', function(event) {
+        let valueRam;
+        let componenteName;
+        switch (event.target.value) {
+            case 'kingston-16gb-49':
+                valueRam = "49$";
+                ramUrl.src = "https://thumb.pccomponentes.com/w-530-530/articles/43/432664/1392-kingston-fury-beast-ddr4-3200-mhz-16gb-2x8gb-cl16.jpg";
+                ramUrl.alt = "Kingston 16GB";
+                componenteName = "Kingston 16GB";
+                break;
+            case 'corsair-32gb-5-124':
+                valueRam = "124$";
+                ramUrl.src = "https://thumb.pccomponentes.com/w-530-530/articles/1076/10764411/1517-corsair-vengeance-ddr5-6000mhz-32gb-2x16gb-cl30.jpg";
+                ramUrl.alt = "Corsair 32GB";
+                componenteName = "Corsair Vengeance DDR5 6000MHz 32GB 2x16GB CL30 ";
+                break;
+            case 'acer-32gb-5-6000-129':
+                valueRam = "129$";
+                ramUrl.src = "https://thumb.pccomponentes.com/w-530-530/articles/1079/10791955/1162-acer-predator-vesta-ii-rgb-ddr5-6000mhz-32gb-2x16gb-cl30.jpg";
+                ramUrl.alt = "Acer 32GB";
+                componenteName = "Acer Predator Vesta II RGB DDR5 6000MHz 32GB 2x16GB CL30";
+                break;
+            case 'pny-32gb-5-6000-155':
+                valueRam = "155$";
+                ramUrl.src = "https://thumb.pccomponentes.com/w-530-530/articles/1081/10810011/1837-pny-xlr8-gaming-mako-epic-x-rgb-ddr5-6400mhz-32gb-2x16gb-cl40.jpg";
+                ramUrl.alt = "PNY 32GB";
+                componenteName = "PNY XLR8 Gaming EPIC-X RGB DDR5 6000MHz 32GB 2x16GB CL30";
+                break;
+            case '0':
+                valueRam = "Precio no disponible";
+                ramUrl.src = "img/RAM.png";
+                ramUrl.alt = "RAM por defecto";
+                componenteName = "RAM por defecto";
+                break;
+            default:
+                valueRam = "Seleccione una memoria RAM válida";
+                ramUrl.src = "img/RAM.png";
+                ramUrl.alt = "RAM por defecto";
+                componenteName = "RAM por defecto";
+                break;
+        }
+        ramPrecio.value = valueRam;
+        dragDrop(ramUrl, ramDrag, valueRam, componenteName,valueRam);
+    }
+    );
 }
+ramSeleccionada();
 
+            
 
-function dragDrop(imagenUrl, dragComponente, value, componenteName) {
+function dragDrop(imagenUrl, dragComponente, value, componenteName, value) {
     imagenUrl.addEventListener('dragstart', function(event) {
         event.dataTransfer.setData('text', event.target.id);
     });
@@ -182,7 +233,7 @@ function dragDrop(imagenUrl, dragComponente, value, componenteName) {
 
     dragComponente.addEventListener('drop', function(event) {
         let botonConfirmar = document.getElementsByClassName('swal-button swal-button--confirm');
-        if (imagenUrl.alt === "Procesador" || procesadorPrecio === 'Seleccione un procesador válido' || procesadorPrecio === 'Precio no disponible' || procesadorPrecio === '0' || imagenUrl.src === 'img/Procesador.png') {
+        if (value === "Precio no disponible" || value === "0$") {
             notificacionError();
             return true;
 
@@ -208,7 +259,7 @@ document.addEventListener('DOMContentLoaded', procesadorSeleccionado);
 function notificacionError(){
     swal({
         title: "Error",
-        text: "Seleccione un procesador válido",
+        text: "Seleccione una imagen válida para añadir al carrito",
         icon: "error",
         button: "Aceptar",
       });
@@ -373,4 +424,7 @@ function comprarItems() {
 }
 document.getElementById('carrito-borrar').addEventListener('click', borrarItems);
 document.getElementById('carrito-comprar').addEventListener('click', comprarItems);
-document.addEventListener('DOMContentLoaded', cargarCarrito);
+document.addEventListener('DOMContentLoaded', function () {
+    procesadorSeleccionado();
+    cargarCarrito();
+});

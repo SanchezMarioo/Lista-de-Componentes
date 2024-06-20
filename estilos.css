@@ -94,8 +94,9 @@ select:hover, input:hover {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    flex-direction: column;
+    flex-direction: row;
     flex-wrap: wrap;
+    gap: 40px;
 }
 /* Estilo del contenedor del procesador */
 .procesador {
@@ -107,19 +108,34 @@ select:hover, input:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
+.ram{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 25vw;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.ram:hover{
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
+}
 
 /* Estilo de la imagen del procesador */
-.procesador img {
+.procesador img,.ram img, .icono-tarjeta img{
     width: 150px;
     height: 150px;
     object-fit: cover;
     margin: 20px 0;
     border-radius: 10px;
-    max-width: 200px;
 }
 
 /* Estilo del valor del procesador */
-.procesador-value input {
+.procesador-value input,.ram-value input {
     background-color: #f4f4f9;
     color: #333;
     border-radius: 5px;
@@ -136,7 +152,7 @@ input:disabled, input[readonly] {
     background-color: #f4f4f9;
     color: #333;
 }
-.procesador-value{
+.procesador-value,.ram-value{
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -193,13 +209,4 @@ input:disabled, input[readonly] {
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-}
-.icono-tarjeta img {
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
-    margin: 20px 0;
-    border-radius: 10px;
-    border: 1px solid #eee;
-    max-width: 200px;
 }

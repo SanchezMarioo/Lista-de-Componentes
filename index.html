@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,6 +42,25 @@
                 </div>
                 <div id="procesador-drag" style="padding: 10px; width: 200px; height: 50px; border: 1px solid #ccc; margin-top: 20px;">
                     Arrastre el procesador aquí
+                </div>
+            </div>
+            <div class="ram">
+                <h2>RAM</h2>
+                <select name="ram" id="ram">
+                    <option value="0">Seleccione RAM</option>
+                    <option value="kingston-16gb-49">Kingston DDR4 3200 MHz 16GB 2x8GB - 48.99$ </option>
+                    <option value="corsair-32gb-5-124">Corsair  DDR5 6000MHz 32GB 2x16GB  - 124.00$ </option>
+                    <option value="acer-32gb-5-6000-129">Acer DDR5 6000MHz - 129$</option>
+                    <option value="pny-32gb-5-6000-155">PNY DDR5 6400MHz 32GB 2x16GB CL40 - 155$</option>
+                </select>
+                <div class="icono-ram">
+                    <img src="img/RAM.png" alt="RAM" id="ramUrl" draggable="true">
+                </div>
+                <div class="ram-value">
+                    <input type="text" name="ram-value" id="ram-value" value="0" disabled readonly>
+                </div>
+                <div id="ram-drag" style="padding: 10px; width: 200px; height: 50px; border: 1px solid #ccc; margin-top: 20px;">
+                    Arrastre la RAM aquí
                 </div>
             </div>
         </div>
