@@ -5,7 +5,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
+    min-height: 100dvh;
     background-color: #f4f4f9;
 }
 
@@ -88,9 +88,21 @@ select:hover, input:hover {
 }
 
 
-.cont-izq {
+.cont-izq,.cont-der {
+    margin-top: 20px;
+    max-width: 25vw;
+    height: auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+.cont-der{
+    margin-top: 20px;
     width: 25vw;
-    height: 100vh;
+    height: auto;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -125,8 +137,7 @@ select:hover, input:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
 }
 
-/* Estilo de la imagen del procesador */
-.procesador img,.ram img, .icono-tarjeta img{
+.procesador img,.ram img, .icono-tarjeta img, .icono-torre img {
     width: 150px;
     height: 150px;
     object-fit: cover;
@@ -134,8 +145,7 @@ select:hover, input:hover {
     border-radius: 10px;
 }
 
-/* Estilo del valor del procesador */
-.procesador-value input,.ram-value input {
+.procesador-value input,.ram-value input,.icono-tarjeta input,.icono-tarjeta select {
     background-color: #f4f4f9;
     color: #333;
     border-radius: 5px;
@@ -170,17 +180,9 @@ input:disabled, input[readonly] {
     overflow: auto;
 
 }
-.cont-der{
-    width: 25vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-.tarjeta{
-    width: 25vw;
-    height: 25vw;
+.tarjeta,.torres,.procesador,.grafica{
+    min-width: 25vw;
+    min-height: 25vw;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -192,7 +194,10 @@ input:disabled, input[readonly] {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 
 }
-.tarjeta:hover{
+.tarjeta{
+    margin-top: 25px;
+}
+.tarjeta:hover, .torres:hover{
     transform: translateY(-10px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); 
 }

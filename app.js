@@ -76,16 +76,17 @@ function procesadorSeleccionado() {
             case '0':
                 procesadorPrecio = "Precio no disponible";
                 imagenUrl.src = "img/Procesador.png";
-                imagenUrl.alt = "Procesador por defecto";
+                imagenUrl.alt = "Defecto";
                 break;
             default:
                 procesadorPrecio = "Seleccione un procesador válido";
                 imagenUrl.src = "img/Procesador.png";
-                imagenUrl.alt = "Procesador por defecto";
+                imagenUrl.alt = "Defecto";
                 break;
         }
+        let categoria = "procesador";
         procesadorValue.value = procesadorPrecio;
-        dragDrop(imagenUrl, dragComponente, procesadorPrecio, componenteName,procesadorPrecio);
+        dragDrop(imagenUrl, dragComponente, procesadorPrecio, componenteName,procesadorPrecio,imagenUrl.alt,categoria);
 
     });
 }
@@ -114,56 +115,57 @@ function tarjetaGráficaSeleccionada() {
                 break;
             case 'nvidia-rtx3070-700':
                 valueGrafica = "700$";
-                graficaUrl.src = "https://www.nvidia.com/content/dam/en-zz/Solutions/geforce/ampere/rtx-3070/rtx-3070-shop.png";
+                graficaUrl.src = "https://thumb.pccomponentes.com/w-530-530/articles/32/324701/1677-gigabyte-geforce-rtx-3070-gaming-oc-8gb-gddr6.jpg";
                 graficaUrl.alt = "Nvidia RTX 3070";
                 componenteName = "Nvidia RTX 3070";
                 break;
             case 'nvidia-rtx3060-400':
                 valueGrafica = "400$";
-                graficaUrl.src = "https://www.nvidia.com/content/dam/en-zz/Solutions/geforce/ampere/rtx-3060/rtx-3060-shop.png";
+                graficaUrl.src = "https://m.media-amazon.com/images/I/61XAtpgr1lL._AC_UF894,1000_QL80_.jpg";
                 graficaUrl.alt = "Nvidia RTX 3060";
                 componenteName = "Nvidia RTX 3060";
                 break;
             case 'amd-rx6900xt-1200':
                 valueGrafica = "1200$";
-                graficaUrl.src = "https://www.amd.com/system/files/82446-raven-am4-ryzen-3-pib-left-facing-1260x709.png";
+                graficaUrl.src = "https://img.pccomponentes.com/articles/35/352835/1468-asus-tuf-amd-radeon-rx-6900xt-oc-16gb-gddr6-foto.jpg";
                 graficaUrl.alt = "AMD RX 6900 XT";
                 componenteName = "AMD RX 6900 XT";
                 break;
             case 'amd-rx6800xt-800':
                 valueGrafica = "800$";
-                graficaUrl.src = "https://www.amd.com/system/files/82446-raven-am4-ryzen-3-pib-left-facing-1260x709.png";
+                graficaUrl.src = "https://img.pccomponentes.com/articles/34/346794/1191-gigabyte-amd-radeon-rx-6800-xt-gaming-oc-16gb-gddr6.jpg";
                 graficaUrl.alt = "AMD RX 6800 XT";
                 componenteName = "AMD RX 6800 XT";
                 break;
             case 'amd-rx6700xt-500':
                 valueGrafica = "500$";
-                graficaUrl.src = "https://www.amd.com/system/files/82446-raven-am4-ryzen-3-pib-left-facing-1260x709.png";
+                graficaUrl.src = "https://m.media-amazon.com/images/I/81L7-qPS0ZL.jpg";
                 graficaUrl.alt = "AMD RX 6700 XT";
                 componenteName = "AMD RX 6700 XT";
                 break;
             case 'amd-rx6600xt-300':
                 valueGrafica = "300$";
-                graficaUrl.src = "https://www.amd.com/system/files/82446-raven-am4-ryzen-3-pib-left-facing-1260x709.png";
+                graficaUrl.src = "https://m.media-amazon.com/images/I/81XvEK3g4KL.jpg";
                 graficaUrl.alt = "AMD RX 6600 XT";
                 componenteName = "AMD RX 6600 XT";
                 break;
             case '0':
                 valueGrafica = "Precio no disponible";
                 graficaUrl.src = "img/Tarjeta.png";
-                graficaUrl.alt = "Tarjeta gráfica por defecto";
+                graficaUrl.alt = "Defecto";
                 componenteName = "Tarjeta gráfica por defecto";
                 break;
             default:
                 valueGrafica = "Seleccione una tarjeta gráfica válida";
                 graficaUrl.src = "img/Tarjeta.png";
-                graficaUrl.alt = "Tarjeta gráfica por defecto";
+                graficaUrl.alt = "Defecto";
                 componenteName = "Tarjeta gráfica por defecto";
                 break;
         }
         
         tarjetaPrecio.value = valueGrafica; // Actualizar el valor aquí dentro del manejador del evento
-        dragDrop(graficaUrl, graficaDrag, valueGrafica,componenteName,valueGrafica);
+        let categoria = "tarjeta-grafica";
+        dragDrop(graficaUrl, graficaDrag, valueGrafica,componenteName,valueGrafica,graficaUrl.alt,categoria);
     });
 }
 tarjetaGráficaSeleccionada();
@@ -203,26 +205,111 @@ function ramSeleccionada() {
             case '0':
                 valueRam = "Precio no disponible";
                 ramUrl.src = "img/RAM.png";
-                ramUrl.alt = "RAM por defecto";
+                ramUrl.alt = "Defecto";
                 componenteName = "RAM por defecto";
                 break;
             default:
                 valueRam = "Seleccione una memoria RAM válida";
                 ramUrl.src = "img/RAM.png";
-                ramUrl.alt = "RAM por defecto";
+                ramUrl.alt = "Defecto";
                 componenteName = "RAM por defecto";
                 break;
         }
+        let categoria = "Memoria RAM";
         ramPrecio.value = valueRam;
-        dragDrop(ramUrl, ramDrag, valueRam, componenteName,valueRam);
+        dragDrop(ramUrl, ramDrag, valueRam, componenteName,valueRam,ramUrl.alt,categoria);
     }
     );
 }
 ramSeleccionada();
+function cajaSeleccionada() {
+    let caja = document.getElementById('torre');
+    let cajaUrl = document.getElementById('torreUrl');
+    let cajaPrecio = document.getElementById('torre-value');
+    let cajaDrag = document.getElementById('torre-drag');
+    caja.addEventListener('change', function(event) {
+        let valueCaja;
+        let componenteName;
+        switch (event.target.value) {
+            case 'corsair-5000d-200':
+                valueCaja = "200$";
+                cajaUrl.src = "https://thumb.pccomponentes.com/w-530-530/articles/34/349632/1705-corsair-5000d-airflow-torre-atx-blanca.jpg";
+                cajaUrl.alt = "Corsair 5000D";
+                componenteName = "Corsair 5000D";
+                break;
+            case 'nzxt-h510-70':
+                valueCaja = "70$";
+                cajaUrl.src = "https://thumb.pccomponentes.com/w-530-530/articles/22/229796/1.jpg";
+                cajaUrl.alt = "NZXT H510";
+                componenteName = "NZXT H510";
+                break;
+            case 'thermaltake-view71-150':
+                valueCaja = "150$";
+                cajaUrl.src = "https://thumb.pccomponentes.com/w-530-530/articles/16/164988/d1.jpg";
+                cajaUrl.alt = "Thermaltake View71";
+                componenteName = "Thermaltake View71";
+                break;
+            case 'lian-li-o11-120':
+                valueCaja = "120$";
+                cajaUrl.src = "https://thumb.pccomponentes.com/w-530-530/articles/1079/10791922/1153-lian-li-o11-dynamic-evo-xl-full-tower-cristal-templado-usb-c-blanca-opiniones.jpg";
+                cajaUrl.alt = "Lian Li O11";
+                componenteName = "Lian Li O11";
+                break;
+            case 'coolermaster-h500-100':
+                valueCaja = "100$";
+                cajaUrl.src = "https://thumb.pccomponentes.com/w-530-530/articles/31/317382/1350-cooler-master-mastercase-h500-argb-cristal-templado-usb-30-gris-metalizado.jpg";
+                cajaUrl.alt = "CoolerMaster H500";
+                componenteName = "CoolerMaster H500";
+                break;
+            case 'be-quiet-dark-base-250':
+                valueCaja = "250$";
+                cajaUrl.src = "https://thumb.pccomponentes.com/w-530-530/articles/24/240130/a9.jpg";
+                cajaUrl.alt = "Be Quiet Dark Base";
+                componenteName = "Be Quiet Dark Base";
+                break;
+            case 'fractal-design-meshify-100':
+                valueCaja = "100$";
+                cajaUrl.src = "https://thumb.pccomponentes.com/w-530-530/articles/1066/10660495/1933-fractal-design-meshify-2-compact-lite-rgb-atx-cristal-templado-usb-32-negra.jpg";
+                cajaUrl.alt = "Fractal Design Meshify";
+                componenteName = "Fractal Design Meshify";
+                break;
+            case 'phanteks-eclipse-70':
+                valueCaja = "70$";
+                cajaUrl.src = "https://thumb.pccomponentes.com/w-530-530/articles/1076/10763679/1475-phanteks-eclipse-g500a-fanless-edition-mid-tower-cristal-templado-usb-30-negra-008de23c-88e9-445e-aa46-977420a22e4c.jpg";
+                cajaUrl.alt = "Phanteks Eclipse";
+                componenteName = "Phanteks Eclipse";
+                break;
+            case '0':
+                valueCaja = "Precio no disponible";
+                cajaUrl.src = "img/Caja.png";
+                cajaUrl.alt = "Defecto";
+                componenteName = "Caja por defecto";
+                break;
+            default:
+                valueCaja = "Seleccione una caja válida";
+                cajaUrl.src = "img/Caja.png";
+                cajaUrl.alt = "Defecto";
+                componenteName = "Caja por defecto";
+                break;
+            }
+            let categoria = "Caja";
+            cajaPrecio.value = valueCaja;
+            dragDrop(cajaUrl, cajaDrag, valueCaja, componenteName,valueCaja,cajaUrl.alt,categoria);
+        }
+        );
 
-            
-
-function dragDrop(imagenUrl, dragComponente, value, componenteName, value) {
+    }
+cajaSeleccionada();
+/**
+ * Handles the drag and drop functionality for a given image URL and drag component.
+ *
+ * @param {HTMLElement} imagenUrl - The image URL element.
+ * @param {HTMLElement} dragComponente - The drag component element.
+ * @param {string} value - The value of the component.
+ * @param {string} componenteName - The name of the component.
+ * @param {string} imagen - The image of the component.
+ */
+function dragDrop(imagenUrl, dragComponente, value, componenteName, value, imagen,categoria) {
     imagenUrl.addEventListener('dragstart', function(event) {
         event.dataTransfer.setData('text', event.target.id);
     });
@@ -233,7 +320,7 @@ function dragDrop(imagenUrl, dragComponente, value, componenteName, value) {
 
     dragComponente.addEventListener('drop', function(event) {
         let botonConfirmar = document.getElementsByClassName('swal-button swal-button--confirm');
-        if (value === "Precio no disponible" || value === "0$") {
+        if (value === "Precio no disponible" || value === "0$" || imagen === "Defecto" || imagen === "0") {
             notificacionError();
             return true;
 
@@ -247,15 +334,11 @@ function dragDrop(imagenUrl, dragComponente, value, componenteName, value) {
               });
             botonConfirmar[0].addEventListener('click', function() {
                 comprobarCarrito();
-                itemCarrito(componenteName, imagenUrl.src, value);
+                itemCarrito(componenteName, imagenUrl.src, value,categoria);
             });
         }
     });
 }
-
-document.addEventListener('DOMContentLoaded', procesadorSeleccionado);
-
-
 function notificacionError(){
     swal({
         title: "Error",
@@ -270,7 +353,7 @@ function comprobarCarrito(){
     var carritoItems = document.getElementById("carrito-items");
     var carritoClick = document.getElementById("carritoImg");
     carritoClick.addEventListener('click', function(){
-    if (carritoValue.value === "0" || carritoItems.innerHTML === ""){
+    if (carritoValue.value === "0"){
         swal({
             title: "Error",
             text: "No se ha seleccionado ningún producto",
@@ -297,13 +380,19 @@ function cerrarCarrito(){
  * @param {string} imagen - The URL of the item's image.
  * @param {number} precio - The price of the item.
  */
-function itemCarrito(nombre, imagen, precio) {
+function itemCarrito(nombre, imagen, precio,categoria) {
     const carritoItems = document.getElementById('carrito-items');
     const totalInput = document.getElementById('carrito-total');
 
+    if (!categoria) {    
+        const categoriaElement = document.createElement('div');
+        categoriaElement.className = categoria;
+        carritoItems.appendChild(categoriaElement);
+    }
+
     // Crear un nuevo elemento de carrito
     const carritoItem = document.createElement('div');
-    carritoItem.className = 'carrito-item';
+    carritoItem.className = categoria + '-item';
 
     const itemNombre = document.createElement('p');
     itemNombre.textContent = nombre;
@@ -398,6 +487,7 @@ function borrarItems() {
             }
         ); 
         }
+
     });
 }
 

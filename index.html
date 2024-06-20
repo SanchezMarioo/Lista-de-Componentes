@@ -6,7 +6,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="estilos.css">
     <script type="module" src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="app.js" defer></script>
+    <script src="app.js" async></script>
 </head>
 <body>
     <header>
@@ -35,7 +35,7 @@
                     <option value="apple-m2-1000">Apple M2 - $1000</option>
                 </select>
                 <div class="icono-procesador">
-                    <img src="img/Procesador.png" alt="Procesador" id="procesadorUrl" draggable="true">
+                    <img src="img/Procesador.png" alt="Defecto" id="procesadorUrl" draggable="true">
                 </div>
                 <div class="procesador-value">
                     <input type="text" name="procesador-value" id="procesador-value" value="0" disabled readonly>
@@ -48,13 +48,13 @@
                 <h2>RAM</h2>
                 <select name="ram" id="ram">
                     <option value="0">Seleccione RAM</option>
-                    <option value="kingston-16gb-49">Kingston DDR4 3200 MHz 16GB 2x8GB - 48.99$ </option>
-                    <option value="corsair-32gb-5-124">Corsair  DDR5 6000MHz 32GB 2x16GB  - 124.00$ </option>
-                    <option value="acer-32gb-5-6000-129">Acer DDR5 6000MHz - 129$</option>
-                    <option value="pny-32gb-5-6000-155">PNY DDR5 6400MHz 32GB 2x16GB CL40 - 155$</option>
+                    <option value="kingston-16gb-49">Kingston DDR4 3200 MHz 16GB 2x8GB - $50 </option>
+                    <option value="corsair-32gb-5-124">Corsair  DDR5 6000MHz 32GB 2x16GB - $125</option>
+                    <option value="acer-32gb-5-6000-129">Acer DDR5 6000MHz - $130</option>
+                    <option value="pny-32gb-5-6000-155">PNY DDR5 6400MHz 32GB 2x16GB CL40 - $155</option>
                 </select>
                 <div class="icono-ram">
-                    <img src="img/RAM.png" alt="RAM" id="ramUrl" draggable="true">
+                    <img src="img/RAM.png" alt="Defecto" id="ramUrl" draggable="true">
                 </div>
                 <div class="ram-value">
                     <input type="text" name="ram-value" id="ram-value" value="0" disabled readonly>
@@ -79,13 +79,36 @@
                     <option value="amd-rx6600xt-300">AMD RX 6600 XT - $300</option>
                 </select>
                 <div class="icono-tarjeta">
-                    <img src="img/Tarjeta.png" alt="Tarjeta" id="tarjetaUrl" draggable="true">
+                    <img src="img/Tarjeta.png" alt="Defecto" id="tarjetaUrl" draggable="true">
                 </div>
                 <div class="tarjeta-value">
                     <input type="text" name="tarjeta-value" id="tarjeta-value" value="0" disabled readonly>
                 </div>
                 <div id="tarjeta-drag" style="padding: 10px; width: 200px; height: 50px; border: 1px solid #ccc; margin-top: 20px;">
                     Arrastre la tarjeta aquí
+                </div>
+            </div>
+            <div class="torres">
+                <h2>Torre</h2>
+                <select name="torre" id="torre">
+                    <option value="0">Seleccione Torre</option>
+                    <option value="corsair-5000d-200">Corsair 5000D - $200</option>
+                    <option value="nzxt-h510-70">NZXT H510 - $120</option>
+                    <option value="thermaltake-view71-150">Thermaltake View 71 - $150</option>
+                    <option value="lian-li-o11-120">Lian Li O11 - $120</option>
+                    <option value="coolermaster-h500-100">Cooler Master H500 - $100</option>
+                    <option value="be-quiet-dark-base-250">Be Quiet Dark Base - $250</option>
+                    <option value="fractal-design-meshify-100">Fractal Design Meshify - $100</option>
+                    <option value="phanteks-eclipse-70">Phanteks Eclipse - $70</option>
+                </select>
+                <div class="icono-torre">
+                    <img src="img/Caja.png" alt="Defecto" id="torreUrl" draggable="true">
+                </div>
+                <div class="torre-value">
+                    <input type="text" name="torre-value" id="torre-value" value="0" disabled readonly>
+                </div>
+                <div id="torre-drag" style="padding: 10px; width: 200px; height: 50px; border: 1px solid #ccc; margin-top: 20px;">
+                    Arrastre la torre aquí
                 </div>
             </div>
         </div>
