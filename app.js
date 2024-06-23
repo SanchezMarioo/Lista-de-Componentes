@@ -179,7 +179,7 @@ function ramSeleccionada() {
         let componenteName;
         switch (event.target.value) {
             case 'kingston-16gb-49':
-                valueRam = "49$";
+                valueRam = "50$";
                 ramUrl.src = "https://thumb.pccomponentes.com/w-530-530/articles/43/432664/1392-kingston-fury-beast-ddr4-3200-mhz-16gb-2x8gb-cl16.jpg";
                 ramUrl.alt = "Kingston 16GB";
                 componenteName = "Kingston 16GB";
@@ -350,7 +350,6 @@ function notificacionError(){
 function comprobarCarrito(){
     let carritoContainer = document.getElementById('carrito-container');
     var carritoValue = document.getElementById("carrito-total");
-    var carritoItems = document.getElementById("carrito-items");
     var carritoClick = document.getElementById("carritoImg");
     carritoClick.addEventListener('click', function(){
     if (carritoValue.value === "0"){
@@ -382,17 +381,22 @@ function cerrarCarrito(){
  */
 function itemCarrito(nombre, imagen, precio,categoria) {
     const carritoItems = document.getElementById('carrito-items');
-    const totalInput = document.getElementById('carrito-total');
-
-    if (!categoria) {    
+    const totalInput = document.getElementById('carrito-total');  
+    const categoriaElements = document.getElementById(categoria);
+    console.log(categoriaElements);
+    if (categoriaElements === null){
         const categoriaElement = document.createElement('div');
-        categoriaElement.className = categoria;
+        categoriaElement.className = 'categoria-items';
+        categoriaElement.id = categoria;
         carritoItems.appendChild(categoriaElement);
+        let categoriaParagragh = document.createElement('p');
+        categoriaParagragh.textContent = categoria;
+        categoriaElement.appendChild(categoriaParagragh);
     }
-
     // Crear un nuevo elemento de carrito
     const carritoItem = document.createElement('div');
     carritoItem.className = categoria + '-item';
+    carritoItem.id = 'carrito-item';
 
     const itemNombre = document.createElement('p');
     itemNombre.textContent = nombre;
