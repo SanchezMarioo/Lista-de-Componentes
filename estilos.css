@@ -111,7 +111,6 @@ select:hover, input:hover {
 
 .carrito-container {
     width: 40vw;
-    max-width: max-content;
     padding: 20px;
     background-color: #ffffff;
     border-radius: 15px;
@@ -146,6 +145,15 @@ button {
 
 button:hover {
     background-color: #444;
+}
+
+
+.categoria-items{
+    display: flex;
+    gap: 20px;
+}
+.categoria-items p{
+    font-weight: bolder;
 }
 
 /* Media queries for responsive design */
