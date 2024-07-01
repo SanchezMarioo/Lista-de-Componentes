@@ -1,7 +1,8 @@
 let procesadorPrecio = 0; 
 var componenteName
-var categoria
+let categoria
 var categoriaDescription
+var carritoItem
 
 function procesadorSeleccionado() {
     const procesador = document.getElementById('procesador');
@@ -217,7 +218,7 @@ function ramSeleccionada() {
                 componenteName = "RAM por defecto";
                 break;
         }
-        categoria = "ram";
+        categoria = "RAM";
         categoriaDescription = "Memoria RAM";
         ramPrecio.value = valueRam;
         dragDrop(ramUrl, ramDrag, valueRam, componenteName,valueRam,ramUrl.alt);
@@ -374,7 +375,33 @@ function cerrarCarrito(){
     let carritoContainer = document.getElementById('carrito-container');
     carritoContainer.style.opacity = '0';
 }
-
+function categoriaSeleccionada(categoria) {
+    const carritoItems = document.getElementById('carrito-items');
+    let categoriaElement = document.getElementById(categoria); // Obtener el elemento de la categoría
+    console.log(categoriaElement);
+    if (categoriaElement === null || !categoriaElement) {
+        // Si no existe el elemento, crear uno nuevo y agregarlo al contenedor principal
+        categoriaElement = document.createElement('div');
+        categoriaElement.id = categoria;
+        categoriaElement.className = 'carrito-categoria';
+        carritoItems.appendChild(categoriaElement);
+        categoriaHiden = document.createElement('div');
+       categoriaHiden.className = categoria + '-description';
+       categoriaHiden.id = 'categoria-description';
+       categoriaElement.appendChild(categoriaHiden);
+       let categoriaParagragh = document.createElement('h4');
+       categoriaParagragh.textContent = categoriaDescription;
+       categoriaHiden.appendChild(categoriaParagragh);
+       let imageHide = document.createElement('img');
+       imageHide.src = "img/flecha-hacia-abajo-para-navegar.png"
+       imageHide.alt = "Flecha hacia abajo";
+       imageHide.width = 25;
+       imageHide.height = 25;
+       imageHide.style.objectFit = 'cover';
+       categoriaHiden.appendChild(imageHide);
+    }
+    return categoriaElement; // Retornar categoriaElement para su uso fuera de la función
+}
 // Arreglar el cierre del carrito
 /**
  * Creates a new item for the shopping cart.
@@ -384,44 +411,34 @@ function cerrarCarrito(){
  * @param {number} precio - The price of the item.
  */
 function itemCarrito(nombre, imagen, precio) {
-    const carritoItems = document.getElementById('carrito-items');
+    const categoriaElement = categoriaSeleccionada(categoria);
     const totalInput = document.getElementById('carrito-total');  
-    const categoriaElements = document.getElementById(categoria);
-    if (categoriaElements === null){
-        var categoriaElement = document.createElement('div');
-        categoriaElement.className = 'categoria-items';
-        categoriaElement.id = categoria;
-        carritoItems.appendChild(categoriaElement);
-        let categoriaParagragh = document.createElement('h4');
-        categoriaParagragh.textContent = categoriaDescription;
-        categoriaElement.appendChild(categoriaParagragh);
-    }
-    // Crear un nuevo elemento de carrito
-    var carritoItem = document.createElement('div');
-    carritoItem.className = categoria + '-item';
-    carritoItem.id = 'carrito-item';
-    // Nuevo codigo categoria
-    const itemNombre = document.createElement('p');
-    itemNombre.textContent = nombre;
-    carritoItem.appendChild(itemNombre);
-
-    const itemImagen = document.createElement('img');
-    itemImagen.src = imagen;
-    itemImagen.width = 100;
-    itemImagen.height = 100;
-    itemImagen.style.objectFit = 'cover';
-    carritoItem.appendChild(itemImagen);
-
-    const itemPrecio = document.createElement('input');
-    itemPrecio.type = 'text';
-    itemPrecio.value = precio;
-    itemPrecio.disabled = true;
-    carritoItem.appendChild(itemPrecio);
-
-    carritoItems.appendChild(carritoItem);
-
+     // Crear el nuevo item para agregar a la categoría
+     var carritoItem = document.createElement('div');
+     carritoItem.className = categoria + '-item';
+     carritoItem.id = 'carrito-item';
+ 
+     // Agregar el nombre del item
+     const itemNombre = document.createElement('p');
+     itemNombre.textContent = nombre;
+     carritoItem.appendChild(itemNombre);
+ 
+     // Agregar la imagen del item
+     const itemImagen = document.createElement('img');
+     itemImagen.src = imagen;
+     itemImagen.width = 100;
+     itemImagen.height = 100;
+     itemImagen.style.objectFit = 'cover';
+     carritoItem.appendChild(itemImagen);
+ 
+     // Agregar el precio del item
+     const itemPrecio = document.createElement('p');
+     itemPrecio.textContent = precio;
+     carritoItem.appendChild(itemPrecio);
+ 
+     // Agregar el item al contenedor de la categoría
+     categoriaElement.appendChild(carritoItem);
     // Actualizar el total del carrito
-    let total = document.getElementById('carrito-total');
     totalInput.value = (parseFloat(totalInput.value)) + parseFloat(precio);
     totalInput.value = totalInput.value + "$";
     // Guardar el item en localStorage
@@ -433,23 +450,34 @@ function itemCarrito(nombre, imagen, precio) {
 }
 function cargarCarrito() {
     const carritoItems = document.getElementById('carrito-items');
-    const totalInput = document.getElementById('carrito-total');
-    const categoriaElements = document.getElementById(categoria);
     var items = JSON.parse(localStorage.getItem('carritoItems')) || [];
-    let totalCarrito = localStorage.getItem('carritoTotal') || 0;
-    let total = document.getElementById('carrito-total');
     for (let i = 0; i < items.length; i++) {
         const item = items[i];
-        if (categoriaElements === null){
-            const categoriaElement = document.createElement('div');
-            categoriaElement.className = 'categoria-items';
-            categoriaElement.id = item.categoria;
-            carritoItems.appendChild(categoriaElement);
-            let categoriaParagragh = document.createElement('h4');
-            categoriaParagragh.textContent = item.categoriaDescription;
-            categoriaElement.appendChild(categoriaParagragh);
-        }
-        // Crear un nuevo elemento de carrito
+        // Verificar si ya existe un elemento con el ID de la categoría
+if (!document.getElementById(item.categoria)) {
+    // Si no existe, crear los elementos
+    let categoriaElement = document.createElement('div');
+    categoriaElement.id = item.categoria;
+    categoriaElement.className = 'carrito-categoria';
+    carritoItems.appendChild(categoriaElement);
+
+    let categoriaHiden = document.createElement('div');
+    categoriaHiden.className = item.categoria + '-description';
+    categoriaHiden.id = 'categoria-description';
+    categoriaElement.appendChild(categoriaHiden);
+
+    let categoriaParagragh = document.createElement('h4');
+    categoriaParagragh.textContent = item.categoriaDescription;
+    categoriaHiden.appendChild(categoriaParagragh);
+
+    let imageHide = document.createElement('img');
+    imageHide.src = "img/flecha-hacia-abajo-para-navegar.png";
+    imageHide.alt = "Flecha hacia abajo";
+    imageHide.width = 25;
+    imageHide.height = 25;
+    imageHide.style.objectFit = 'cover';
+    categoriaHiden.appendChild(imageHide);
+}
         const carritoItem = document.createElement('div');
         carritoItem.className = item.categoria + '-item';
         carritoItem.id = 'carrito-item';
@@ -531,4 +559,5 @@ document.getElementById('carrito-comprar').addEventListener('click', comprarItem
 document.addEventListener('DOMContentLoaded', function () {
     procesadorSeleccionado();
     cargarCarrito();
+
 });

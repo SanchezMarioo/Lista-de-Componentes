@@ -52,7 +52,6 @@ select:hover, input:hover {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    align-items: center;
     padding: 20px;
     width: 100%;
     max-width: 1200px;
@@ -185,4 +184,11 @@ button:hover {
         flex-wrap: wrap;
         justify-content: space-around;
     }
+}
+#categoria-description{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    gap: 20px;
 }
