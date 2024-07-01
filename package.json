@@ -13,6 +13,7 @@
     "@fontsource-variable/rubik": "^5.0.22",
     "@fontsource/poppins": "^5.0.14",
     "sweetalert": "^2.1.2",
+    "sweetalert2": "^11.12.1",
     "toastr": "^2.1.4",
     "vercel": "^32.3.0"
   }

@@ -1,3 +1,4 @@
+
 let procesadorPrecio = 0; 
 var componenteName
 let categoria
@@ -93,12 +94,11 @@ function procesadorSeleccionado() {
     });
 }
 function tarjetaGráficaSeleccionada() {
-    let tarjetaGrafica = document.getElementById('tarjeta');
     let graficaUrl = document.getElementById('tarjetaUrl');
-    let tarjetaPrecio = document.getElementById('tarjeta-value'); // Cambiado var a let para mantener consistencia
+    let graficaValue = document.getElementById('tarjeta-value') // Cambiado var a let para mantener consistencia
     let graficaDrag = document.getElementById('tarjeta-drag');
 
-    tarjetaGrafica.addEventListener('change', function(event) {
+    graficaValue.addEventListener('change', function(event) {
         let valueGrafica;
         let componenteName;
         
@@ -400,6 +400,7 @@ function categoriaSeleccionada(categoria) {
        imageHide.style.objectFit = 'cover';
        categoriaHiden.appendChild(imageHide);
     }
+    console.log(categoriaElement);
     return categoriaElement; // Retornar categoriaElement para su uso fuera de la función
 }
 // Arreglar el cierre del carrito
@@ -432,8 +433,10 @@ function itemCarrito(nombre, imagen, precio) {
      carritoItem.appendChild(itemImagen);
  
      // Agregar el precio del item
-     const itemPrecio = document.createElement('p');
-     itemPrecio.textContent = precio;
+     const itemPrecio = document.createElement('input');
+     itemPrecio.type = 'text';
+     itemPrecio.value = precio;
+     itemPrecio.disabled = true;
      carritoItem.appendChild(itemPrecio);
  
      // Agregar el item al contenedor de la categoría
@@ -454,30 +457,30 @@ function cargarCarrito() {
     for (let i = 0; i < items.length; i++) {
         const item = items[i];
         // Verificar si ya existe un elemento con el ID de la categoría
-if (!document.getElementById(item.categoria)) {
-    // Si no existe, crear los elementos
-    let categoriaElement = document.createElement('div');
-    categoriaElement.id = item.categoria;
-    categoriaElement.className = 'carrito-categoria';
-    carritoItems.appendChild(categoriaElement);
+    if (!document.getElementById(item.categoria)) {
+        // Si no existe, crear los elementos
+        let categoriaElement = document.createElement('div');
+        categoriaElement.id = item.categoria;
+        categoriaElement.className = 'carrito-categoria';
+        carritoItems.appendChild(categoriaElement);
 
-    let categoriaHiden = document.createElement('div');
-    categoriaHiden.className = item.categoria + '-description';
-    categoriaHiden.id = 'categoria-description';
-    categoriaElement.appendChild(categoriaHiden);
+        let categoriaHiden = document.createElement('div');
+        categoriaHiden.className = item.categoria + '-description';
+        categoriaHiden.id = 'categoria-description';
+        categoriaElement.appendChild(categoriaHiden);
 
-    let categoriaParagragh = document.createElement('h4');
-    categoriaParagragh.textContent = item.categoriaDescription;
-    categoriaHiden.appendChild(categoriaParagragh);
+        let categoriaParagragh = document.createElement('h4');
+        categoriaParagragh.textContent = item.categoriaDescription;
+        categoriaHiden.appendChild(categoriaParagragh);
 
-    let imageHide = document.createElement('img');
-    imageHide.src = "img/flecha-hacia-abajo-para-navegar.png";
-    imageHide.alt = "Flecha hacia abajo";
-    imageHide.width = 25;
-    imageHide.height = 25;
-    imageHide.style.objectFit = 'cover';
-    categoriaHiden.appendChild(imageHide);
-}
+        let imageHide = document.createElement('img');
+        imageHide.src = "img/flecha-hacia-abajo-para-navegar.png";
+        imageHide.alt = "Flecha hacia abajo";
+        imageHide.width = 25;
+        imageHide.height = 25;
+        imageHide.style.objectFit = 'cover';
+        categoriaHiden.appendChild(imageHide);
+    }
         const carritoItem = document.createElement('div');
         carritoItem.className = item.categoria + '-item';
         carritoItem.id = 'carrito-item';
@@ -498,6 +501,49 @@ if (!document.getElementById(item.categoria)) {
         carritoItems.appendChild(carritoItem);
     }
 }
+function cargarCarritoNotificacion() {
+    const valueCarrito = document.getElementById('carrito-total');
+    if (localStorage.length !== 0  ) {
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+              confirmButton: "btn btn-success",
+              cancelButton: "btn btn-danger"
+            },
+            buttonsStyling: false
+          });
+          swalWithBootstrapButtons.fire({
+            title: "Recuperar Datos",
+            text: "¿Desea recuperar los datos del carrito?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Si, recuperar!",
+            cancelButtonText: "No, borrar!",
+            reverseButtons: true
+          }).then((result) => {
+            if (result.isConfirmed) {
+                cargarCarrito();
+              swalWithBootstrapButtons.fire({
+                title: "Recuperado con exito!",
+                text: "El historial de componentes fue recuperado con exito",
+                icon: "success",
+              });
+            } else if (
+              result.dismiss === Swal.DismissReason.cancel
+            ) {
+                valueCarrito.value = '0';
+                localStorage.removeItem('carritoItems');
+                localStorage.removeItem('carritoTotal');
+              swalWithBootstrapButtons.fire({
+                title: "Borrado con exito ",
+                text: "El historial de componentes fue borrado con exito.",
+                icon: "error"
+              });
+            }
+          });
+    }
+}
+cargarCarritoNotificacion();
+
 
 function borrarItems() {
     const carritoItems = document.getElementById('carrito-items');
@@ -558,6 +604,4 @@ document.getElementById('carrito-borrar').addEventListener('click', borrarItems)
 document.getElementById('carrito-comprar').addEventListener('click', comprarItems);
 document.addEventListener('DOMContentLoaded', function () {
     procesadorSeleccionado();
-    cargarCarrito();
-
 });
